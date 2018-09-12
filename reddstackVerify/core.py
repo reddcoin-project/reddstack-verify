@@ -25,8 +25,8 @@ def run():
 		fbUsers = get_network('facebook')
 		updates = facebook.get_pages(fbUsers)
 
-		print "sleeping 15"
-		time.sleep(15)
+		print "sleeping 10 mins"
+		time.sleep(600)
 
 def get_network(network):
 	results = networkColls.find({network:{'$exists':1}})
@@ -42,5 +42,3 @@ def update_networks(network, users):
 		name = user['username']
 
 		networkColls.update({network + '.username': user['username']},{'$set': {network + '.valid': user['valid']}})
-		
-

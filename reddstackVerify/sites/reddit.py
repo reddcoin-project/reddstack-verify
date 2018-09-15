@@ -58,7 +58,7 @@ def get_pages(users):
 				user['reddit']['valid'] = valid
 
 				print user['reddit']
-				updates.append(user['twitter'])
+				updates.append(user['reddit'])
 
 		return updates
 	else:

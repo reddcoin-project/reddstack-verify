@@ -61,7 +61,7 @@ def get_pages(users):
 				print user['facebook']
 				updates.append(user['facebook'])
 
-		return users
+		return updates
 	else:
 		print "No Facebook users"
 

@@ -43,10 +43,7 @@ def get_pages(users):
 		for user in users:
 			if 'proofURL' in user['twitter']:
 				pageUrl = user['twitter']['proofURL']
-				fingerprint = user['twitter'].get('fingerprint', 'missing')
-			
-			
-			
+				fingerprint = user['twitter'].get('fingerprint', 'missing')		
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)

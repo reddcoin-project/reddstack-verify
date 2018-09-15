@@ -20,10 +20,12 @@ def run():
 		print "Processing Reddit Users"
 		redditUsers = get_network('reddit')
 		updates = reddit.get_pages(redditUsers)
+		update_networks('reddit', updates)
 
 		print "Processing Facebook Users"
 		fbUsers = get_network('facebook')
 		updates = facebook.get_pages(fbUsers)
+		update_networks('facebook', updates)
 
 		print "sleeping 10 mins"
 		time.sleep(600)

@@ -47,6 +47,7 @@ def compare_result(fingerprint, page_result):
 
 def get_pages(users):
 	print "Getting facebook pages"
+	updates = []
 	if users.count() > 0:
 		for user in users:
 			pageUrl = user['facebook']['proofURL']
@@ -58,6 +59,7 @@ def get_pages(users):
 				user['facebook']['valid'] = valid
 
 				print user['facebook']
+				updates.append(user['facebook'])
 
 		return users
 	else:

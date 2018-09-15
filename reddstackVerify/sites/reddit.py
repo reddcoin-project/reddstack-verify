@@ -46,11 +46,11 @@ def compare_result(fingerprint, page_result):
 
 def get_pages(users):
 	print "Getting reddit pages"
+	updates = []
 	if users.count() > 0:
 		for user in users:
 			pageUrl = user['reddit']['proofURL']
 			fingerprint = user['reddit'].get('fingerprint', 'missing')
-
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)
@@ -58,8 +58,9 @@ def get_pages(users):
 				user['reddit']['valid'] = valid
 
 				print user['reddit']
+				updates.append(user['twitter'])
 
-		return users
+		return updates
 	else:
 		print "No reddit users"
 

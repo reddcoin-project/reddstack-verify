@@ -30,7 +30,7 @@ def get_page(page):
 
 def compare_result(fingerprint, page_result):
 	print ("Comparing fingerprint: %s with page_reults: %s" % (fingerprint,page_result))
-	if fingerprint == page_result:
+	if page_result.find(fingerprint) > -1:
 		return True
 
 	return False

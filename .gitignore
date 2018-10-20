@@ -1,3 +1,7 @@
+/venv/
+/.vscode/
 .idea
 *.iml
 *.pyc
+*.html
+/reddstackVerify/test.py

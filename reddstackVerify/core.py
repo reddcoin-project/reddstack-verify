@@ -1,8 +1,5 @@
-from bs4 import BeautifulSoup
-from sites import twitter, reddit, facebook
+from .sites import twitter, reddit, facebook, youtube
 import time
-import requests
-import json
 from pymongo import MongoClient
 
 clientDB = MongoClient('localhost', 27017)
@@ -12,6 +9,11 @@ networkColls = db.networks
 def run():
 	while True:
 		print "Running Loop"
+		print "Processing Youtube Users"
+		youtubeUsers = get_network('youtube')
+		updates = youtube.get_pages(youtubeUsers)
+		update_networks('youtube', updates)
+
 		print "Processing Twitter Users"
 		twitterUsers = get_network('twitter')
 		updates = twitter.get_pages(twitterUsers)

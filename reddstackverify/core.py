@@ -1,10 +1,13 @@
 from .sites import twitter, reddit, facebook, youtube
 import time
+import config
 from pymongo import MongoClient
 
 clientDB = MongoClient('localhost', 27017)
 db = clientDB['socialAccounts']
 networkColls = db.networks
+
+log = config.log
 
 def run():
 	while True:

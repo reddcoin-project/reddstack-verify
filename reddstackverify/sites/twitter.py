@@ -1,13 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+from ..config import log
 
 pattern = '^http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+\/status)\/[0-9]+(?:\/)?'
 
 def get_page(page):
 
 	if re.match(pattern,page):
-		print "A regex match for: " + page
+		log.info("A regex match for: " + page)
 
 		try:
 			headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3)'}
@@ -19,24 +20,24 @@ def get_page(page):
 			tweet = tree.find_all('div', attrs={'class':'js-tweet-text-container'})
 			para = tweet[0].select('p')
 
-			print "Returning: " + para[0].getText()
+			log.info("Returning: " + para[0].getText())
 			return para[0].getText()
 		except Exception as e:
-			print ("Could not retrieve %s. %s. Skipping." % (page, str(e)))
+			log.info("Could not retrieve %s. %s. Skipping." % (page, str(e)))
 			return
 	else:
-		print "no regex match for: " + page
+		log.info("no regex match for: " + page)
 		return
 
 def compare_result(fingerprint, page_result):
-	print ("Comparing fingerprint: %s with page_reults: %s" % (fingerprint,page_result))
+	log.info("Comparing fingerprint: %s with page_reults: %s" % (fingerprint,page_result))
 	if page_result.find(fingerprint) > -1:
 		return True
 
 	return False
 
 def get_pages(users):
-	print "Getting twitter pages"
+	log.info("Getting twitter pages")
 
 	updates = []
 	if users.count() > 0:
@@ -47,15 +48,15 @@ def get_pages(users):
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)
-				print ("fingerprint: %s valid %s" % (fingerprint, valid))
+				log.info("fingerprint: %s valid %s" % (fingerprint, valid))
 				user['twitter']['valid'] = valid
 
-				print user['twitter']
+				log.info(user['twitter'])
 				updates.append(user['twitter'])
 
 		return updates
 	else:
-		print "No twitter users"
+		log.info("No twitter users")
 
 	return
 

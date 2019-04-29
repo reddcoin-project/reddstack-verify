@@ -50,16 +50,16 @@ def get_pages(users):
 	updates = []
 	if users.count() > 0:
 		for user in users:
-			pageUrl = user['reddit']['proofURL']
-			fingerprint = user['reddit'].get('fingerprint', 'missing')
+			pageUrl = user['proofURL']
+			fingerprint = user.get('fingerprint', 'missing')
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)
 				log.info("fingerprint: %s valid %s" % (fingerprint, valid))
-				user['reddit']['valid'] = valid
+				user['valid'] = valid
 
-				log.info(user['reddit'])
-				updates.append(user['reddit'])
+				log.info(user)
+				updates.append(user)
 
 		return updates
 	else:

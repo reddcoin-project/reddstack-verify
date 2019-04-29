@@ -4,8 +4,8 @@ import config
 from pymongo import MongoClient
 
 clientDB = MongoClient('localhost', 27017)
-db = clientDB['socialAccounts']
-networkColls = db.networks
+db = clientDB['socialNetworks']
+network_colls = db.networks
 
 log = config.log
 
@@ -36,7 +36,7 @@ def run():
 		time.sleep(600)
 
 def get_network(network):
-	results = networkColls.find({network:{'$exists':1}})
+	results = network_colls.find({"network": network})
 
 	return results
 
@@ -48,4 +48,6 @@ def update_networks(network, users):
 		log.info(user["username"] +" & " + str(user["valid"]))
 		name = user['username']
 
-		networkColls.update({network + '.username': user['username']},{'$set': {network + '.valid': user['valid']}})
+		result = network_colls.update({"network": network, "username": name},{'$set': {"valid": user['valid']}})
+
+		log.info('Inserted {0} : {1}'.format(name,user['valid']))

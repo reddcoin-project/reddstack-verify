@@ -51,16 +51,16 @@ def get_pages(users):
 	updates = []
 	if users.count() > 0:
 		for user in users:
-			pageUrl = user['facebook']['proofURL']
-			fingerprint = user['facebook'].get('fingerprint', 'missing')
+			pageUrl = user['proofURL']
+			fingerprint = user.get('fingerprint', 'missing')
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)
 				log.info("fingerprint: %s valid %s" % (fingerprint, valid))
-				user['facebook']['valid'] = valid
+				user['valid'] = valid
 
-				log.info(user['facebook'])
-				updates.append(user['facebook'])
+				log.info(user)
+				updates.append(user)
 
 		return updates
 	else:

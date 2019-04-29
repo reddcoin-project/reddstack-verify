@@ -42,17 +42,17 @@ def get_pages(users):
 	updates = []
 	if users.count() > 0:
 		for user in users:
-			if 'proofURL' in user['twitter']:
-				pageUrl = user['twitter']['proofURL']
-				fingerprint = user['twitter'].get('fingerprint', 'missing')		
+			if 'proofURL' in user:
+				pageUrl = user['proofURL']
+				fingerprint = user.get('fingerprint', 'missing')
 			result = get_page(pageUrl)
 			if result != None:
 				valid = compare_result(fingerprint, result)
 				log.info("fingerprint: %s valid %s" % (fingerprint, valid))
-				user['twitter']['valid'] = valid
+				user['valid'] = valid
 
-				log.info(user['twitter'])
-				updates.append(user['twitter'])
+				log.info(user)
+				updates.append(user)
 
 		return updates
 	else:

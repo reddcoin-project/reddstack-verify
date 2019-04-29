@@ -9,7 +9,25 @@ from .version import __version__
 VERSION = __version__
 
 DEBUG = True
-logPath = "../logs"
+
+
+def get_working_dir():
+    from os.path import expanduser
+    home = expanduser('~')
+
+    working_dir = os.path.join(home, '.reddstackverify')
+
+    if not os.path.exists(working_dir):
+        os.makedirs(working_dir)
+
+    return working_dir
+
+
+def get_pid_filename():
+    return 'reddstackverify'
+
+
+logPath = get_working_dir()
 log = logging.getLogger()
 if len(log.handlers) == 0:
     log.setLevel(logging.DEBUG if DEBUG else logging.INFO)

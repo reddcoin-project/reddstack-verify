@@ -7,7 +7,6 @@ import subprocess
 import time
 import signal
 
-import daemonize
 
 verify_server = None  # server subprocess handle
 

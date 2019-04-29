@@ -3,7 +3,7 @@ import time
 import config
 from pymongo import MongoClient
 
-clientDB = MongoClient('localhost', 27017)
+clientDB = MongoClient('localhost', 27017, connect=False)
 db = clientDB['socialNetworks']
 network_colls = db.networks
 

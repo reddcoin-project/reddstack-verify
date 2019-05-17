@@ -20,7 +20,8 @@ def get_page(page):
 			content = pageresult.content
 			tree = BeautifulSoup(content, features = 'lxml')
 
-			comment = tree.select('code#u_0_q')
+			#comment = tree.select('code#u_0_q')
+			comment = tree.select('code#u_0_o')
 			comment_data = comment[0].string.encode("utf-8")
 
 			soup = BeautifulSoup(comment_data, 'lxml')

@@ -36,8 +36,6 @@ def scrape(url, reddid):
         log.info("Error: no ID found.")
         return 1
 
-    print(found_id)
-
     if reddid not in found_id:
         log.info("Error: ID found does not match input provided.")
         return 1
